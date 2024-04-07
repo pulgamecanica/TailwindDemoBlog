@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html class="h-full">
+  <head>
+    <title>Authors- Pulgamecanica</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="<%= asset_path("icon.ico") %>">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body
+    class="h-full bg-white dark:bg-black"
+    data-controller="theme"
+  >
+    <!-- Main Divides the quick bottom menu and the rest of the application-->
+    <main class="w-full h-full pb-10 text-gray-800 dark:text-gray-200 bg-slate-100 dark:bg-slate-900">
+
+      <!-- Application main section-->
+      <section class="w-full h-full flex flex-wrap md:flex-nowrap items-stretch p-1 gap-1 md:gap-0">
+        <div
+          class="flex w-full md:w-auto"
+          data-controller="resizable"
+          data-resizable-storage-value="menu"
+        >
+          <div class="flex-1 block overflow-hidden break-words">
+            <div class="flex h-full flex-col gap-1">
+              <!-- Home / Search -->
+              <div class="bg-gray-200 dark:bg-gray-800 rounded-[0.5rem]">
+                <% [[authors_control_panel_path, "HOME", asset_path("icons/home-light.svg"), asset_path("icons/home-dark.svg")],[authors_control_panel_path, "SEARCH", asset_path("icons/search-light.svg"), asset_path("icons/search-dark.svg")]].each do |link, text, light_icon_path, dark_icon_path| %>
+                <%= link_to link, class: "flex w-full items-center gap-2 group p-2" do %>
+                <div
+                  class="opacity-60 group-hover:opacity-100 w-8 h-auto hidden dark:inline-block rounded-full p-1"
+                >
+                  <img src="<%= light_icon_path %>">
+                </div>
+                <div
+                  class="opacity-60 group-hover:opacity-100 w-8 h-auto inline-block dark:hidden rounded-full p-1"
+                >
+                  <img src="<%= dark_icon_path %>">
+                </div>
+                <h1 class="group-hover:underline group-hover:text-gray-800 dark:group-hover:text-white text-gray-600 dark:text-gray-400 font-bold"><%= text %></h1>
+                <% end %>
+                <% end %>
+              </div>
+              <!-- Posts -->
+              <div class="flex-1 bg-gray-200 dark:bg-gray-800 rounded-[0.5rem] flex flex-nowrap flex-col p-1">
+                <div class="flex flex-row items-center justify-between">
+                  <%= link_to authors_posts_path, class: "flex-1 flex w-full items-center gap-2 group" do %>
+                  <div
+                    class="opacity-60 group-hover:opacity-100 w-6 h-auto hidden dark:inline-block rounded-full"
+                    data-action="click->theme#enableDarkTheme"
+                  >
+                    <img src="<%= asset_path("icons/library-light.svg") %>">
+                  </div>
+                  <div
+                    class="opacity-60 group-hover:opacity-100 w-6 h-auto inline-block dark:hidden rounded-full"
+                    data-action="click->theme#enableLightTheme"
+                  >
+                    <img src="<%= asset_path("icons/library-dark.svg") %>">
+                  </div>
+                  <h1 class="group-hover:underline group-hover:text-gray-800 dark:group-hover:text-white text-gray-600 dark:text-gray-400 font-bold">POSTS</h1>
+                  <% end %>
+
+                  <%= link_to new_authors_post_path, class: "group w-6 h-auto inline-block dark:hidden rounded-full" do %>
+                    <img class="opacity-60 group-hover:opacity-100" src="<%= asset_path("icons/add-dark.svg") %>">
+                  <% end %>
+
+                  <%= link_to new_authors_post_path, class: "group w-6 h-auto hidden dark:inline-block rounded-full" do %>
+                    <img class="opacity-60 group-hover:opacity-100" src="<%= asset_path("icons/add-light.svg") %>">
+                  <% end %>
+                </div>
+                <div
+                  class="flex justify-end relative m-1"
+                  data-controller="toggle-display"
+                  data-toggle-display-display-value="block"
+                >
+                  <button
+                    class="flex group items-center gap-2"
+                    data-action="click->toggle-display#toggle"
+                  >
+                    <p class="group-hover:underline group-hover:text-gray-800 dark:group-hover:text-white text-gray-600 dark:text-gray-400 text-sm">Recents</p>
+                    <img class="hidden dark:inline-block h-4 w-4 opacity-60 group-hover:opacity-100" src="<%= asset_path("icons/filter-light.svg") %>">
+                    <img class="inline-block dark:hidden h-4 w-4 opacity-60 group-hover:opacity-100" src="<%= asset_path("icons/filter-dark.svg") %>">
+                  </button>
+                  <div
+                    class="hidden absolute mt-6 top-0 right-0 bg-gray-100 dark:bg-gray-900 text-sm p-1 rounded-sm text-left"
+                    data-toggle-display-target="toggleableBox"
+                  >
+                    <p class="px-1 text-[9px]">Sort by</p>
+                    <button class="w-full text-left p-1 font-bold text-gray-700 hover:text-gray-900 hover:bg-gray-200 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700 block">Recents</button>
+                    <button class="w-full text-left p-1 font-bold text-gray-700 hover:text-gray-900 hover:bg-gray-200 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700 block">Recently Added</button>
+                    <button class="w-full text-left p-1 font-bold text-gray-700 hover:text-gray-900 hover:bg-gray-200 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700 block">Alphabetical</button>
+                    <hr>
+                    <p class="px-1 text-[9px]">View As</p> 
+                    <button class="w-full text-left p-1 font-bold text-gray-700 hover:text-gray-900 hover:bg-gray-200 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700 block">Recent</button>
+                  </div>
+                </div>
+                <div class="flex-1 text-white">
+                </div>
+              </div>
+              <!-- Projects -->
+              <div class="flex-1 bg-gray-200 dark:bg-gray-800 rounded-[0.5rem] flex flex-nowrap flex-col p-1">
+                <div class="flex flex-row items-center justify-between">
+                  <%= link_to authors_posts_path, class: "flex-1 flex w-full items-center gap-2 group" do %>
+                  <div
+                    class="opacity-60 group-hover:opacity-100 w-6 h-auto hidden dark:inline-block rounded-full"
+                    data-action="click->theme#enableDarkTheme"
+                  >
+                    <img src="<%= asset_path("icons/library-light.svg") %>">
+                  </div>
+                  <div
+                    class="opacity-60 group-hover:opacity-100 w-6 h-auto inline-block dark:hidden rounded-full"
+                    data-action="click->theme#enableLightTheme"
+                  >
+                    <img src="<%= asset_path("icons/library-dark.svg") %>">
+                  </div>
+                  <h1 class="group-hover:underline group-hover:text-gray-800 dark:group-hover:text-white text-gray-600 dark:text-gray-400 font-bold">PROJECTS</h1>
+                  <% end %>
+
+                  <%= link_to new_authors_post_path, class: "group w-6 h-auto inline-block dark:hidden rounded-full" do %>
+                    <img class="opacity-60 group-hover:opacity-100" src="<%= asset_path("icons/add-dark.svg") %>">
+                  <% end %>
+
+                  <%= link_to new_authors_post_path, class: "group w-6 h-auto hidden dark:inline-block rounded-full" do %>
+                    <img class="opacity-60 group-hover:opacity-100" src="<%= asset_path("icons/add-light.svg") %>">
+                  <% end %>
+                </div>
+                <div
+                  class="flex justify-end relative m-1"
+                  data-controller="toggle-display"
+                  data-toggle-display-display-value="block"
+                >
+                  <button
+                    class="flex group items-center gap-2"
+                    data-action="click->toggle-display#toggle"
+                  >
+                    <p class="group-hover:underline group-hover:text-gray-800 dark:group-hover:text-white text-gray-600 dark:text-gray-400 text-sm">Recents</p>
+                    <img class="hidden dark:inline-block h-4 w-4 opacity-60 group-hover:opacity-100" src="<%= asset_path("icons/filter-light.svg") %>">
+                    <img class="inline-block dark:hidden h-4 w-4 opacity-60 group-hover:opacity-100" src="<%= asset_path("icons/filter-dark.svg") %>">
+                  </button>
+                  <div
+                    class="hidden absolute mt-6 top-0 right-0 bg-gray-100 dark:bg-gray-900 text-sm p-1 rounded-sm text-left"
+                    data-toggle-display-target="toggleableBox"
+                  >
+                    <p class="px-1 text-[9px]">Sort by</p>
+                    <button class="w-full text-left p-1 font-bold text-gray-700 hover:text-gray-900 hover:bg-gray-200 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700 block">Recents</button>
+                    <button class="w-full text-left p-1 font-bold text-gray-700 hover:text-gray-900 hover:bg-gray-200 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700 block">Recently Added</button>
+                    <button class="w-full text-left p-1 font-bold text-gray-700 hover:text-gray-900 hover:bg-gray-200 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700 block">Alphabetical</button>
+                    <hr>
+                    <p class="px-1 text-[9px]">View As</p> 
+                    <button class="w-full text-left p-1 font-bold text-gray-700 hover:text-gray-900 hover:bg-gray-200 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700 block">Recent</button>
+                  </div>
+                </div>
+                <div class="flex-1 text-white">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="hidden md:block w-1 cursor-col-resize hover:bg-gray-300 dark:hover:bg-gray-700"
+            data-resizable-target="resizer"
+          ></div>
+        </div>
+
+        <div class="w-full md:w-auto flex-1 flex-col flex bg-gray-200 dark:bg-gray-800 rounded-[0.5rem] overflow-y-scroll p-2">
+          <div class="flex justify-end gap-1">
+            <!-- Light svg, Dark svg, contrller-target-open-->
+            <% [ [
+                  asset_path("icons/bell-light.svg"),
+                  asset_path("icons/bell-dark.svg"),
+                  "notifications"
+                ], [
+                  asset_path("icons/profile-light.svg"),
+                  asset_path("icons/profile-dark.svg"),
+                  "profile_links"
+                ]
+            ].each do |light_icon_path, dark_icon_path, partial| %>
+            <div
+              data-controller="toggle-display"
+              data-toggle-display-display-value="flex"
+              class="relative font-bold text-gray-700 dark:text-gray-300"
+            >
+              <button
+                class="p-2 flex dark:hidden bg-gray-100 justify-center items-center rounded-full group"
+                data-action="click->toggle-display#toggle"
+              >
+                <img class="opacity-80 group-hover:opacity-100 h-5 w-5" src="<%= dark_icon_path %>">
+              </button>
+              <button
+                class="p-2 hidden dark:flex bg-gray-900 justify-center items-center rounded-full group"
+                data-action="click->toggle-display#toggle"
+              >
+                <img class="opacity-80 group-hover:opacity-100 h-5 w-5" src="<%= light_icon_path %>">
+              </button>
+              <div
+                data-toggle-display-target="toggleableBox"
+                class="absolute right-0 top-10 bg-gray-100 dark:bg-gray-900 rounded-sm p-1 flex flex-col hidden shadow-lg shadow-slate-900"
+              >
+                <%= render partial %>
+              </div>
+            </div>
+          <% end %>
+          </div>
+          <div class="flex-1"><%= yield %></div>
+        </div>
+        
+        <div
+          class="w-full md:w-auto flex flex flex-row-reverse break-words"
+          data-controller="resizable"
+          data-resizable-storage-value="featured"
+          data-resizable-right-to-left-value="false"
+        >
+          <div
+            class="flex-1 bg-gray-200 dark:bg-gray-800 rounded-[0.5rem] inline-block pt-4 px-2 overflow-x-hidden overflow-y-scroll"
+          >
+            <div class="flex justify-end mb-5">
+              <button>
+                <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" class="w-5 h-5 stroke-current">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                  <g id="SVGRepo_iconCarrier"> <circle cx="12" cy="12" r="10" stroke-width="1.5"/> <path d="M14.5 9.50002L9.5 14.5M9.49998 9.5L14.5 14.5" stroke-width="1.5" stroke-linecap="round"/> </g>
+                </svg>
+              </button>
+            </div>
+            <%= turbo_frame_tag :featured, src: authors_profile_path do %>
+
+            <% end %>
+          </div>
+
+          <div
+            class="hidden md:block w-1 cursor-col-resize hover:bg-gray-300 dark:hover:bg-gray-700"
+            data-resizable-target="resizer"
+          ></div>
+
+        </div>
+      </section>
+      <!-- Bottom Menu -->
+      <section class="w-full bg-black fixed md:relative bottom-0 left-0 flex justify-between items-center px-5 gap-1">
+<!--1--><img class="h-8 w-auto" src="<%= asset_path("icons/logo-dark.svg") %>">
+<!--2--><div class="text-white">by pulgmecanica</div>
+<!--3--><div class="flex justify-center items-center py-1">
+          <div class="bg-gray-500 rounded-full p-1 flex items-center justify-between gap-2">
+            <button
+              class="w-6 h-auto bg-gray-100 dark:bg-gray-400 hover:bg-gray-600 dark:hover:none inline-block rounded-full p-1"
+              data-action="click->theme#enableDarkTheme"
+            >
+              <img src="<%= asset_path("icons/dark-mode.svg") %>">
+            </button>
+            <button
+              class="w-6 h-auto dark:bg-gray-100 bg-gray-400 dark:hover:bg-gray-600 inline-block rounded-full p-1"
+              data-action="click->theme#enableLightTheme"
+            >
+              <img src="<%= asset_path("icons/light-mode.svg") %>">
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

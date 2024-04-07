@@ -1,0 +1,118 @@
+<!-- Sessions -->
+<p class="text-[1.8rem] font-bold">Sessions Info</p>
+<div class="flex gap-3 flex-wrap">
+  <div class="flex-1 min-w-[200px] bg-slate-200 dark:bg-slate-900 border-gray-700 border-[1px] rounded-sm inline-block flex justify-between items-center overflow-y-scroll">
+    <div class="p-4">
+      <span class="text-4xl font-bold"><%= current_author.sign_in_count %></span>
+      <p>logins</p>
+    </div>
+    <div class="hidden lg:block">
+        <img class="h-24 w-auto p-2 hidden dark:block" src="<%= asset_path("icons/numbers-light.svg") %>">
+        <img class="h-24 w-auto p-2 block dark:hidden" src="<%= asset_path("icons/numbers-dark.svg") %>">
+    </div>
+  </div>
+  <div class="flex-1 min-w-[200px] bg-slate-200 dark:bg-slate-900 border-gray-700 border-[1px] rounded-sm inline-block flex justify-between items-center overflow-y-scroll">
+    <div class="flex flex-col justify-between gap-3 p-2">
+      <p class="text-sm italic font-bold">Current Session</p>
+      <div>
+        <span class="text-4xl font-bold"><%= current_author.last_sign_in_ip %></span>
+        <p><%= current_author.current_sign_in_at %></p>
+      </div>
+    </div>
+    <div class="hidden lg:block">
+        <img class="h-24 w-auto p-2 hidden dark:block" src="<%= asset_path("icons/session-light.svg") %>">
+        <img class="h-24 w-auto p-2 block dark:hidden" src="<%= asset_path("icons/session-dark.svg") %>">
+    </div>
+  </div>
+  <div class="flex-1 min-w-[200px] bg-slate-200 dark:bg-slate-900 border-gray-700 border-[1px] rounded-sm inline-block flex justify-between items-center overflow-y-scroll">
+    <div class="flex flex-col justify-between gap-3 p-2">
+      <p class="text-sm italic font-bold">Last Session</p>
+      <div>
+        <span class="text-4xl font-bold"><%= current_author.current_sign_in_ip %></span>
+        <p><%= current_author.last_sign_in_at %></p>
+      </div>
+    </div>
+    <div class="hidden lg:block">
+        <img class="h-24 w-auto p-2 hidden dark:block" src="<%= asset_path("icons/time-past-light.svg") %>">
+        <img class="h-24 w-auto p-2 block dark:hidden" src="<%= asset_path("icons/time-past-dark.svg") %>">
+    </div>
+  </div>
+</div>
+<hr class="mt-5 border-gray-800 dark:border-gray-200">
+<!-- Stats -->
+<p class="text-[1.8rem] font-bold">Stats</p>
+<div class="flex md:hidden">No support found for this resolution</div>
+<div class="hidden md:flex flex-wrap gap-6 justify-around">
+  <div
+    class="text-center"
+    data-controller="pie-graph"
+  >
+    <svg
+      data-pie-graph-target="svg"
+    ></svg>
+    <p>Posts / views</p>
+  </div>
+
+  <div
+    class="text-center"
+    data-controller="pie-graph"
+  >
+    <svg
+      data-pie-graph-target="svg"
+    ></svg>
+    <p>Posts / Likes</p>
+  </div>
+</div>
+<hr class="mt-5 border-slate-800 dark:border-slate-200">
+<!-- Global Impact Map -->
+<p class="text-[1.8rem] font-bold text-slate-800 dark:text-slate-200 mb-2">Global Impact Map</p>
+<div class="flex flex-row flex-wrap items-end justify-around gap-4 flex-wrap-reverse text-slate-800 dark:text-slate-200">
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div class="text-center bg-white dark:bg-gray-900 font-bold p-2">Views per country</div>
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th scope="col" class="px-6 py-3">
+            Country
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Total views
+          </th>
+          <th scope="col" class="px-6 py-3">
+            This month
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Most viewed page
+          </th>
+        </tr>
+      </thead>
+      <tbody class="text-center">
+        <% [["PT", 1000, 42, authors_control_panel_path], ["FR", 1, 1, nil]].each do |country, total_views, views_this_month, most_viewed_page |%>
+        <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+          <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            <%= country %>
+          </th>
+          <td class="px-6 py-4">
+            <%= total_views %>
+          </td>
+          <td class="px-6 py-4">
+            <%= views_this_month %>
+          </td>
+          <td class="px-6 py-4">
+            <%= link_to most_viewed_page %>
+          </td>
+          <% end %>
+        </tr>    
+      </tbody>
+    </table>
+  </div>
+  <div class="hidden md:flex flex-col items-center justify-center gap-2">
+    <svg
+      class="m-auto inline-block bg-cover bg-center rounded-lg"
+      width=200 height=200
+      data-controller="world-sphere-map"
+      style="background-image: url('https://i.pinimg.com/originals/95/9f/b1/959fb1f51bc1026ace27acede55e1bc8.gif');"
+    ></svg>
+    <h3>Map (Views Global)</h3>
+  </div>
+</div>

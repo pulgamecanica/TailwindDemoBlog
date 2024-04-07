@@ -1,0 +1,30 @@
+<div class="mt-16">
+<%= turbo_frame_tag :featured do %>
+<div class="relative max-w-2xl mx-auto bg-slate-100 dark:bg-slate-900 shadow-xl rounded-lg">
+  <div class="rounded-t-lg h-32 overflow-hidden bg-cover mb-16" style="background-image: url('https://images.unsplash.com/photo-1549880338-65ddcdfd017b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ');">
+    <div class="absolute left-[50%] w-auto max-w-32 h-32 mt-16 border-4 border-white rounded-full overflow-hidden" style="transform: translateX(-50%);">
+      <img class="object-cover object-center h-full w-auto" src='https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='Woman looking front'>
+    </div>
+  </div>
+  <div class="text-center pt-2">
+    <h2 class="font-semibold"><%= current_author.nickname %></h2>
+    <p class="text-gray-500"><%= current_author.biography %></p>
+    <p class="text-gray-500 text-sm"><%= current_author.email %></p>
+  </div>
+  <ul class="py-4 mt-2 flex items-center justify-around">
+    <li class="flex flex-col items-center justify-around">
+      <svg class="w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+          <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+      </svg>
+      <div>2k</div>
+    </li>
+    <li class="flex flex-col items-center justify-between">
+      <svg viewBox="0 0 24 24" fill="none" class="w-6 stroke-current">
+        <g id="SVGRepo_iconCarrier"> <path d="M10 22C6.22876 22 4.34315 22 3.17157 20.8284C2 19.6569 2 18.7712 2 15" stroke-width="1.5" stroke-linecap="round"></path> <path d="M22 15C22 18.7712 22 19.6569 20.8284 20.8284C19.6569 22 17.7712 22 14 22" stroke-width="1.5" stroke-linecap="round"></path> <path d="M14 2C17.7712 2 19.6569 2 20.8284 3.17157C22 4.34315 22 5.22876 22 9" stroke-width="1.5" stroke-linecap="round"></path> <path d="M10 2C6.22876 2 4.34315 2 3.17157 3.17157C2 4.34315 2 5.22876 2 9" stroke-width="1.5" stroke-linecap="round"></path> <path d="M5.89243 14.0598C5.29748 13.3697 5 13.0246 5 12C5 10.9754 5.29747 10.6303 5.89242 9.94021C7.08037 8.56222 9.07268 7 12 7C14.9273 7 16.9196 8.56222 18.1076 9.94021C18.7025 10.6303 19 10.9754 19 12C19 13.0246 18.7025 13.3697 18.1076 14.0598C16.9196 15.4378 14.9273 17 12 17C9.07268 17 7.08038 15.4378 5.89243 14.0598Z" stroke-width="1.5"></path> <circle cx="12" cy="12" r="2" stroke-width="1.5"></circle></g>
+      </svg>
+      <div>10k</div>
+    </li>
+  </ul>
+</div>
+<% end %>
+</div>

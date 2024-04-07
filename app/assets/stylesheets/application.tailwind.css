@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: 'Exo Regular';
+    font-optical-sizing: auto;
+    font-display: swap;
+    src: url('Exo/static/Exo-Regular.ttf');
+  }
+}
+
+
+
+/*
+@font-face {
+   font-family: 'Exo Thin';
+   src: url('fonts/Exo/static/Exo-Thin.ttf');
+}
+
+@font-face {
+  font-family: 'Exo ExtraLight';
+  src: url('static/Exo-ExtraLight.ttf');
+}
+
+@font-face {
+  font-family: 'Exo Light';
+  src: url('static/Exo-Light.ttf');
+}
+
+@font-face {
+  font-family: 'Exo Regular';
+  src: url('static/Exo-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Exo Medium';
+  src: url('static/Exo-Medium.ttf');
+}
+
+@font-face {
+  font-family: 'Exo SemiBold';
+  src: url('static/Exo-SemiBold.ttf');
+}
+
+@font-face {
+  font-family: 'Exo Bold';
+  src: url('static/Exo-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'Exo ExtraBold';
+  src: url('static/Exo-ExtraBold.ttf');
+}
+
+@font-face {
+  font-family: 'Exo Black';
+  src: url('static/Exo-Black.ttf');
+}
+
+@font-face {
+  font-family: 'Exo ThinItalic';
+  src: url('static/Exo-ThinItalic.ttf');
+}
+
+@font-face {
+  font-family: 'Exo ExtraLightItalic';
+  src: url('static/Exo-ExtraLightItalic.ttf');
+}
+
+@font-face {
+  font-family: 'Exo LightItalic';
+  src: url('static/Exo-LightItalic.ttf');
+}
+
+@font-face {
+  font-family: 'Exo Italic';
+  src: url('static/Exo-Italic.ttf');
+}
+
+@font-face {
+  font-family: 'Exo MediumItalic';
+  src: url('static/Exo-MediumItalic.ttf');
+}
+
+@font-face {
+  font-family: 'Exo SemiBoldItalic';
+  src: url('static/Exo-SemiBoldItalic.ttf');
+}
+
+@font-face {
+  font-family: 'Exo BoldItalic';
+  src: url('static/Exo-BoldItalic.ttf');
+}
+
+@font-face {
+  font-family: 'Exo ExtraBoldItalic';
+  src: url('static/Exo-ExtraBoldItalic.ttf');
+}
+
+@font-face {
+  font-family: 'Exo BlackItalic';
+  src: url('static/Exo-BlackItalic.ttf');
+}*/

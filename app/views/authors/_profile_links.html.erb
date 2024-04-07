@@ -1,0 +1,11 @@
+<%= link_to root_path, class: "w-full p-1 font-bold text-gray-700 hover:text-gray-900 hover:bg-gray-200 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700" do %>
+  Account
+<% end %>
+<%= link_to authors_profile_path, class: "w-full p-1 font-bold text-gray-700 hover:text-gray-900 hover:bg-gray-200 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700" do %>
+  Profile
+<% end %>
+<%= link_to authors_settings_path, class: "w-full p-1 font-bold text-gray-700 hover:text-gray-900 hover:bg-gray-200 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700" do %>
+  Settings
+<% end %>
+<hr>
+<%= link_to "Logout", destroy_author_session_path, class: "w-full p-1 font-bold text-gray-700 hover:text-gray-900 hover:bg-gray-200 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700", method: :delete, data: { turbo_method: :delete }%>
